@@ -9,8 +9,10 @@ Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-    const myCount = arr.reduce((acc, value) => value, 0);
-    return myCount;
+  // return arr.reduce((acc, value) => acc + 1);
+    // const myCount = arr.reduce((acc, value) => value, 0);
+    // return myCount;
+    return arr.reduce(acc => acc + 1 , 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -70,9 +72,14 @@ let starWarsData = [{
 }];
 
 const returnNames = (arr) => {
-    let myNewArr = []
-    myNewArr.push(arr.reduce((acc, value) => arr.acc.name[0], 0));
-    return myNewArr;
+    // let myNewArr = []
+    // myNewArr.push(arr.reduce((acc, value) => arr.acc.name[0], 0));
+    // return myNewArr;
+    let charname = arr.reduce((names, char, idx)=>{
+      names[idx] = char.name;
+      return names;
+    }, []);
+    return charname;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -84,7 +91,7 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (str) => {
-  // Solution code here...
+  return str.split('').reduce((acc, current) => current + acc, '');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -137,7 +144,12 @@ const characters = [
 ];
 
 const countNumberOfChildren = (arr) => {
-  // Solution code here...
+  return arr.reduce((sum, person) => {
+    if (person.children){
+      sum += person.children.length;
+    }
+    return sum;
+  }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -148,9 +160,7 @@ Write a function that, given an array of numbers as input, uses reduce to calcul
 Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
-const calculateAverage = (arr) => {
-  // Solution code here...
-};
+const calculateAverage = (arr) => arr.reduce((acc, value) => acc += value, 0) / arr.length;
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -170,7 +180,14 @@ const isPrime = (value) => {
 };
 
 const countPrimeNumbers = (arr) => {
-  // Solution code here...
+  return arr.reduce((acc, value) => {
+    if (isPrime(value) === true){
+      return acc + 1;
+    }
+    else{
+      return acc;
+    }
+  }, 0)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -213,7 +230,13 @@ const snorlaxData = {
 };
 
 const extractStat = (statName, arr) => {
-  // Solution code here...
+  let match = arr.reduce((matchingObj, currObj) => {
+    if(currObj.stat.name === statName){
+      return currObj;
+    }
+    return matchingObj;
+  }, {});
+  return match;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -227,7 +250,21 @@ Write a function named extractChildren that, given the array of characters from 
 ------------------------------------------------------------------------------------------------ */
 
 const extractChildren = (arr) => {
-  // Solution code here...
+  let namesWithA = arr.filter((currentChar) => {
+    let nameArray = (currentChar.name.toLowerCase()).split('');
+    if(nameArray.includes('a')){
+      return currentChar;
+    }
+  });
+  let childrensNames = namesWithA.reduce((allChildren, currentObject) => {
+    if(currentObject.children){
+      currentObject.children.forEach((value) => {
+        allChildren.push(value);
+      })
+    }
+    return allChildren;
+  }, []);
+  return childrensNames;
 };
 
 /* ------------------------------------------------------------------------------------------------

@@ -13,7 +13,11 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
 };
 
 const getCourseKeys = (obj) => {
-  // Solution code here...
+    let newArr = [];
+  obj.forEach(key => {
+        newArr.push(key);     
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -70,7 +74,7 @@ let characters = [
 
 const getHouses = (arr) => {
   let houses = [];
-  // Solution code here...
+  arr.forEach(element => houses.push(element.house));
   return houses;
 };
 
@@ -87,8 +91,17 @@ hasChildrenValues(characters, 'Sansa') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  // Solution code here...
-
+  let result = '';
+  arr.forEach((element)=>{
+    if(element.name === character){
+      if(element.children.length !== 0){
+        result = true;
+      }else{
+        result = false;
+      }
+    }
+  });
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -100,7 +113,18 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
+  let result = '';
+  arr.forEach(element => {
+    let entryArr = Object.entries(element)
+    if (entryArr[0][1]=== character) {
+      if(entryArr[2][1].length !== 0){
+        result = true;
+      }else{
+        result = false;
+      }
+    }
+  })
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -110,7 +134,19 @@ Write a function named totalCharacters that takes in an array and returns the nu
 ------------------------------------------------------------------------------------------------ */
 
 const totalCharacters = (arr) => {
-  // Solution code here...
+  let charactersArr =[];
+  arr.forEach((element)=>{
+    charactersArr.push(element.name);
+    if(element.spouse){
+      charactersArr.push(element.spouse);
+    }
+    if(element.children.length !== 0){
+      element.children.forEach((child)=>{
+        charactersArr.push(child);
+      });
+    }
+  });
+  return charactersArr.length;
 };
 
 /* ------------------------------------------------------------------------------------------------

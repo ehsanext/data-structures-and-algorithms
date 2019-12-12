@@ -11,12 +11,10 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 ------------------------------------------------------------------------------------------------ */
 
 const forLoopTwoToThe = (arr) => {
-let newArray = [];  
-  for(let i = 0; i < arr.length; i++){
-    let newElement = Math.pow(i, 2);
-    newArray.push(newElement);
-    return newArray; 
+  for(let i = 0; i<arr.length; i++){
+    arr[i] = Math.pow(2,arr[i]);
   }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -25,13 +23,11 @@ CHALLENGE 2
 Write a function named forEachTwoToThe that produces the same output as your forLoopTwoToThe function from challenge 1, but uses forEach instead of a for loop.
 ------------------------------------------------------------------------------------------------ */
 
-let newArray =[];
 const forEachTwoToThe = (arr) => {
-  arr.forEach ( myNewcal(element)=> {
-    let newElement = Math.pow(element, 2);
-    newArray.push(newElement);
-    return newArray;
-  })
+  arr.forEach((element,index) =>{
+    arr[index] = Math.pow(2,element);
+  });
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -41,7 +37,10 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 ------------------------------------------------------------------------------------------------ */
 
 const mapTwoToThe = (arr) => {
-  // Solution code here...
+  let newArray = arr.map( element => {
+    return Math.pow(2,element);
+  });
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,7 +54,10 @@ For example: charCode(['h','i']) returns [104, 105].
 ------------------------------------------------------------------------------------------------ */
 
 const charCode = (arr) => {
-  // Solution code here...
+  let charCodeArr = arr.map((value) =>{
+    return value.charCodeAt(0);
+  });
+  return charCodeArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -69,7 +71,13 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 ------------------------------------------------------------------------------------------------ */
 
 const evenOdd = (arr) => {
-  // Solution code here...
+  let newArr = arr.map((value)=>{
+    if(typeof(value) === 'number'){
+      return value % 2 === 0 ? 'even':'odd';
+    }
+    return 'N/A';
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -115,7 +123,10 @@ const snorlaxAbilities = {
 };
 
 const extractAbilities = (arr) => {
-  // Solution code here...
+  let abilitiesList = arr.map(value => {
+    return value.ability.name;
+  });
+  return abilitiesList;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -162,7 +173,13 @@ const snorlaxStats = {
 };
 
 const extractStats = (arr) => {
-  // Solution code here...
+  let statsArr = [];
+
+  arr.map( statObj => {
+    statsArr.push({'name': statObj.stat.name, 'total': (statObj.effort + statObj.baseStat)});
+  });
+
+  return statsArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
